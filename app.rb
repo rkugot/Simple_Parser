@@ -24,7 +24,7 @@ get '/products' do
 end
 
 post '/products' do
-	@p = Product.where("title = ?",params[:product])
+	@product = Product.where("title = ?",params[:product])
 	erb :products_list
 end
 

@@ -1,3 +1,23 @@
-<% @p.each do |p| %>
-	<%= p.price %>
-<% end %>
+
+<div class="row">	
+
+	<% @product.each do |p|%>
+	<div class="col-md-3">
+		<div>
+			<%= p.title %>
+		</div>
+		<br />
+		<div>
+			<a rel="nofollow" target="_blank" href="<%= p.image %>"><img class="popup" src="<%= p.image %>" class="img-rounded" style="width: 140px; height: 140px;" data-toggle="tooltip"></a>
+		</div>	
+		<br />
+		<div>
+			Weight: <%= p.pack %> gr
+		</div>	
+		<div>
+			Price: <%= p.price %> 
+		</div>				
+	</div>
+	<% end %>
+
+</div>
