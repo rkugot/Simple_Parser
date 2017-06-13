@@ -38,10 +38,7 @@ post '/save' do
     image = item.xpath("//img[contains(@id,'bigpic')]/@src")
     for i in 0..labels do
 		weight = pack[i].text.split(' ')
-		p weight[0].to_f
 		pr = price[i].text.split(' ')
-		p pr[0].to_f
-		p image.text
 		product = Product.create(title: title, pack: weight[0].to_f, price: pr[0].to_f, image: image)
 	end
 	erb "Your product is save"
