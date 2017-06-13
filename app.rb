@@ -19,6 +19,15 @@ get '/save' do
 	erb :save
 end
 
+get '/products' do
+	erb :products
+end
+
+post '/products' do
+	@p = Product.where("title = ?",params[:product])
+	erb :products_list
+end
+
 post '/save' do
 	url = params[:url]
 	item = Nokogiri::HTML(open(url))
@@ -34,7 +43,6 @@ post '/save' do
 		p pr[0].to_f
 		p image.text
 		product = Product.create(title: title, pack: weight[0].to_f, price: pr[0].to_f, image: image)
-	#  	csv << ["#{title} - #{pack[i].text}","#{price[i].text.strip}","#{image}"]
 	end
-	erb "You save #{url}, #{title}, #{labels}"
+	erb "Your product is save"
 end
