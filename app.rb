@@ -21,11 +21,20 @@ end
 
 post '/save' do
 	url = params[:url]
-	product = Nokogiri::HTML(open(url))
-	title = product.xpath('//*[@id="right"]/div/div[1]/div/h1/text()').text.strip
-	labels = product.xpath("//ul[contains(@class,'attribute_labels_lists')]").length - 1
-    pack = product.xpath("//span[contains(@class,'attribute_name')]")
-    price = product.xpath("//span[contains(@class,'attribute_price')]")
-    image = product.xpath("//img[contains(@id,'bigpic')]/@src")
+	item = Nokogiri::HTML(open(url))
+	title = item.xpath('//*[@id="right"]/div/div[1]/div/h1/text()').text.strip
+	labels = item.xpath("//ul[contains(@class,'attribute_labels_lists')]").length - 1
+    pack = item.xpath("//span[contains(@class,'attribute_name')]")
+    price = item.xpath("//span[contains(@class,'attribute_price')]")
+    image = item.xpath("//img[contains(@id,'bigpic')]/@src")
+    for i in 0..labels do
+		weight = pack[i].text.split(' ')
+		p weight[0].to_f
+		pr = price[i].text.split(' ')
+		p pr[0].to_f
+		p image.text
+		product = Product.create(title: title, pack: weight[0].to_f, price: pr[0].to_f, image: image)
+	#  	csv << ["#{title} - #{pack[i].text}","#{price[i].text.strip}","#{image}"]
+	end
 	erb "You save #{url}, #{title}, #{labels}"
 end
