@@ -4,7 +4,7 @@
 	<% @product.each do |p|%>
 	<div class="col-md-3">
 		<div>
-			<%= p.title %>
+			<strong><%= p.title %></strong>
 		</div>
 		<br />
 		<div>
@@ -12,10 +12,10 @@
 		</div>	
 		<br />
 		<div>
-			Weight: <%= p.pack %> <%= p.unit %>
+			<strong>Weight:</strong> <%= p.pack %> <%= p.unit %>
 		</div>	
 		<div>
-			Price: <%= p.price %> &#8364;
+			<strong>Price:</strong> <%= p.price %> &#8364;
 		</div>				
 	</div>
 	<% end %>
