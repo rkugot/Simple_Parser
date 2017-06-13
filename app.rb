@@ -39,7 +39,7 @@ post '/save' do
     for i in 0..labels do
 		weight = pack[i].text.split(' ')
 		pr = price[i].text.split(' ')
-		product = Product.create(title: title, pack: weight[0].to_f, price: pr[0].to_f, image: image)
+		product = Product.create(title: title, pack: weight[0].to_f, unit: weight[1], price: pr[0].to_f, image: image)
 	end
 	erb "Your product is save"
 end
