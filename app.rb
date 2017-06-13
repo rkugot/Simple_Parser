@@ -10,5 +10,5 @@ class Product < ActiveRecord::Base
 end
 
 get '/' do
-	erb "Hello! Welcome to my simple parser"			
+	erb :index			
 end
