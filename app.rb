@@ -11,6 +11,11 @@ set :database, "sqlite3:parser.db"
 class Product < ActiveRecord::Base
 end
 
+class Contact < ActiveRecord::Base
+	validates :email, presence: true, format: { with: /@/}
+	validates :message, presence: true
+end
+
 get '/' do
 	erb "Welcome to simple parser"			
 end
@@ -21,6 +26,21 @@ end
 
 get '/products' do
 	erb :products
+end
+
+get '/contacts' do
+	@contact = Contact.new
+	erb :contacts
+end
+
+post '/contacts' do
+	@contact = Contact.new (params[:contact])
+	if 	@contact.save
+		erb "Your message is send"
+	else
+		@error = @contact.errors.full_messages.first
+		erb :contacts
+	end
 end
 
 post '/products' do
